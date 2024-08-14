@@ -36,4 +36,4 @@ RUN mkdir -p /etc/nginx/ssl && \
     chown -R www-data:www-data /var/lib/nginx/
 
 # Nginx 실행 (포그라운드에서 실행하여 컨테이너가 종료되지 않도록 함)
-CMD ["nginx", "-g", "daemon off;"]
+CMD [ "nginx", "-g", "daemon off;" ]

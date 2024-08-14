@@ -1,1 +1,0 @@
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /Users/iyeonjae/Desktop/Inception/srcs/yeolee2.42.fr.key -out /Users/iyeonjae/Desktop/Inception/srcs/yeolee2.42.fr.crt -subj "/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=Cadet/CN=yeolee2.42.fr"

@@ -6,7 +6,7 @@ chown -R mysql:mysql /var/lib/mysql
 
 # MariaDB 서버를 백그라운드에서 네트워크 없이 시작
 # --skip-networking 옵션은 네트워크 연결을 막고 로컬에서만 접근 가능하도록 설정
-mysqld_safe --skip-networking &
+mysqld_safe --skip-networking --nowatch
 
 # MariaDB 서버가 완전히 시작될 때까지 대기
 # mysqladmin ping 명령어를 사용하여 서버가 응답할 때까지 1초 간격으로 확인

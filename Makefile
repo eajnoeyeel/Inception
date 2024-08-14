@@ -3,41 +3,41 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yeolee2 <yeolee2@student.42.fr>            +#+  +:+       +#+         #
+#    By: yeolee2 <yeolee2@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 16:34:35 by yeolee2           #+#    #+#              #
-#    Updated: 2024/08/08 17:36:14 by yeolee2          ###   ########.fr        #
+#    Updated: 2024/08/13 13:16:29 by yeolee2          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS			=	SRCS
+SRCS			=	srcs
 
 DOCKER_COMPOSE	:=	$(shell if command -v docker-compose >/dev/null 2>&1; \
 					then echo "docker-compose"; else echo "docker compose"; fi)
 
 all				:	dir
-					@sudo -E ${DOCKER_COMPOSE} -f ./${SRCS}/docker-compose.yml up -d
+					@${DOCKER_COMPOSE} -f ./${SRCS}/docker-compose.yml up -d
 
 build			:	dir
-					@sudo -E ${DOCKER_COMPOSE} -f ./${SRCS}/docker-compose.yml up -d --build
+					@${DOCKER_COMPOSE} -f ./${SRCS}/docker-compose.yml up -d --build
 
 down			:
-					@sudo -E ${DOCKER_COMPOSE} -f ./${SRCS}/docker-compose.yml down -v
+					@${DOCKER_COMPOSE} -f ./${SRCS}/docker-compose.yml down -v
 
-re				:	clean	
-					@sudo -E ${DOCKER_COMPOSE} -f ./${SRCS}/docker-compose.yml up -d
+re				:	clean
+					@${DOCKER_COMPOSE} -f ./${SRCS}/docker-compose.yml up -d
 
 dir				:
 					@bash ${SRCS}/init_dir.sh
 
 clean			:	down
-					@sudo -E docker image ls | grep '${SRCS}-' | awk '{print $$1}' | xargs docker image rm
+					@docker system prune --all --force
 
-fclean			:	down
-					@sudo -E docker image ls | grep '${SRCS}-' | awk '{print $$1}' | xargs docker image rm
-					@sudo -E docker builder prune --all --force
-					@sudo -E docker network prune --force
-					@sudo -E docker volume prune --force
-					@bash ${SRCS}/init_dir.sh --delete
+fclean			:	clean
+					@docker system prune --all --force --volumes
+					@docker network prune --force
+					@docker volume prune --force
+					@sudo rm -rf ~/data/wordpress/*
+					@sudo rm -rf ~/data/mariadb/*
 
 .PHONY			:	all build down re clean fclean dir
