@@ -124,4 +124,4 @@ Environment variables are stored in the `.env` file and are used to configure Ma
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under meeeee.
